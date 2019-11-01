@@ -54,6 +54,7 @@ class Dish extends \yii\db\ActiveRecord
             'name' => 'название блюда',
             'foto' => 'фото',
             'price' => 'цена',
+	    'count' => '',
         ];
     }
 

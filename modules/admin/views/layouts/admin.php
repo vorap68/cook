@@ -67,7 +67,7 @@ AppAsset::register($this);
 							<li class="active"><a href="<?= Url::home()?>" class="scroll">Home</a></li>
 							
 							 <li class="mt-sm-3"><a href="<?= Url::to('/admin/dish/index') ?>" class="scroll">Cправочник блюд</a></li>
-				<li class="mt-sm-3"><a href="<?= Url::to('/admin/employee/index') ?>" class="scroll">Cправочник сотрудников</a></li>
+				<li class="mt-sm-3"><a href="<?= Url::to('/admin/dish/index') ?>" class="scroll">Cправочник сотрудников</a></li>
 				
 							  <li class="mt-sm-3"><a href="<?= \yii\helpers\Url::to(['/site/logout'])?>"><i class="fa fa-user"></i> <?= Yii::$app->user->identity['name']?> (Выход)</a></li>
 						

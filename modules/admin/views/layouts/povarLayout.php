@@ -6,7 +6,6 @@ use yii\bootstrap\NavBar;
 use yii\widgets\Breadcrumbs;
 use app\assets\AppAsset;
 use yii\helpers\Url;
-use yii\db\ActiveRecord;
 
 AppAsset::register($this);
 ?>
@@ -20,7 +19,7 @@ AppAsset::register($this);
      <meta charset="<?= Yii::$app->charset ?>">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <?= Html::csrfMetaTags() ?>
-    <title><?= Html::encode($this->title) ?></title>
+    <title>Админка |<?= Html::encode($this->title) ?></title>
     <?php $this->head() ?>
     <title>Polaroid Photography Category Bootstrap Responsive website Template | Home :: w3layouts</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -65,15 +64,12 @@ AppAsset::register($this);
                     <label for="drop" class="toggle">Menu</label>
                     <input type="checkbox" id="drop">
 						<ul class="menu">
-						    <li class="active"><a href="<?= Url::home()?>" class="scroll">Home</a></li>
-						    <?php if(Yii::$app->user->isGuest): ?>
-							 <li class="mt-sm-3"><a href="<?= Url::to('/admin')?>" class="scroll">Администратор</a></li>
-							 <li class="mt-sm-3"><a href="<?= Url::to('/admin/dish/povar')?>" class="scroll">Повар</a></li>
-							 <li class="mt-sm-3"><a href="<?= Url::to('/admin/dish/employee')?>" class="scroll">Сотрудник</a></li>
-							 <?php else: ?>
-                                    <li><a href="<?= \yii\helpers\Url::to(['/site/logout'])?>"><i class="fa fa-user"></i> <?= Yii::$app->user->identity['name']?> (Выход)</a></li>
-                                <?php endif;?>
+							<li class="active"><a href="<?= Url::home()?>" class="scroll">Home</a></li>
 							
+							
+				
+							  <li class="mt-sm-3"><a href="<?= \yii\helpers\Url::to(['/site/logout'])?>"><i class="fa fa-user"></i> <?= Yii::$app->user->identity['name']?> (Выход)</a></li>
+						
 							
                         </ul>
 				</nav>
@@ -81,18 +77,35 @@ AppAsset::register($this);
 		</header>
     </div>
     <div class="main" id="home">
-        <div class="banner-text-w3ls">
+  <!--      <div class="banner-text-w3ls">
             <div class="container">
-		
-<?php echo  $content?>
-		
+                <div class="mx-auto text-center">
+                    <h1>Nibh eleifend nulla nascetur pharetra
+	<br>commodo mi augue interdum tellus.</h1>
+					<p class="banp mx-auto mt-3">Nulla pellentesque mi non laoreet eleifend. Integer porttitor mollisar lorem, at molestie arcu  </p>
+					<a class="btn btn-primary mt-lg-5 mt-3 agile-link-bnr" href="#about" role="button">Learn More</a>
+                </div>
+            </div>
+        </div>-->
+
+ <!--services-->
+
+ <div class="container dishfont">   <!-- //services-->
+     <?php if( Yii::$app->session->hasFlash('success') ): ?>
+            <div class="alert alert-success alert-dismissible" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <?php echo Yii::$app->session->getFlash('success'); ?>
+            </div>
+        <?php endif;?>
+<?= $content?>
+	</div>
+ </div>
 
 <!-- contact -->
 	 
 	 <!-- //contact -->
 
-    </div>
-	    </div>
+    
 <?php $this->endBody() ?>
 </body>
 </html>

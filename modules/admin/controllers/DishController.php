@@ -33,6 +33,8 @@ class DishController extends AppController {
      * Lists all Dish models.
      * @return mixed
      */
+    
+    /* вызывается при входе admin*/
     public function actionIndex() {
 	$dataProvider = new ActiveDataProvider([
 	    'query' => Dish::find(),
@@ -43,6 +45,62 @@ class DishController extends AppController {
 	]);
     }
 
+    /* вызывается при входе povar*/
+    public function actionPovar() {
+	$this->layout = 'povarLayout';
+	//$media = Dish::updateAll(['status'=>0]);
+	$dataProvider = new ActiveDataProvider([
+	    'query' => Dish::find(),
+	]);
+	//debug($dataProvider);
+
+	return $this->render('povar', [
+		    'dataProvider' => $dataProvider,
+	]);
+    }
+    
+    /* вызывается для отмены выбраных блюд ПОВАРОМ*/
+    public function actionPovarreset() {
+	$media = Dish::updateAll(['status'=>0]);
+	return $this->redirect('povar');
+    }
+    
+    /* вызывается для записи в БД выбраных блюд ПОВАРОМ на сегодн день*/
+    public function actionPovartoday(){
+	$mass = Yii::$app->request->post();
+	foreach ($mass['selection'] as $key => $value) {
+	    $media = Dish::find()->where(['id'=>$value])->one();
+	    $media->status = 1;
+	    $media->save();
+	}
+	return $this->redirect('povar');
+    }
+    
+    
+    /* вызывается при входе сотрудник*/
+    public function actionEmployee(){
+	$this->layout = 'povarLayout';
+	$medias = new Dish;
+	$dataProvider = new ActiveDataProvider([
+	    'query' => Dish::find()->where(['status' =>'1']),
+	]);
+	
+	return $this->render('employee',  compact('dataProvider','medias'));
+    }
+    
+    
+     /* вызывается  выбраных блюд СОТРУДНИКОМ на сегодн день*/
+    public function actionEmployeetoday(){
+	$mass = Yii::$app->request->post();
+	debug($mass);
+    }
+
+     public function actionEmployeereset() {
+//	$media = Dish::updateAll(['status'=>0]);
+//	return $this->redirect('povar');
+    }
+
+    
     public function actionView($id) {
 	return $this->render('view', [
 		    'model' => $this->findModel($id),
@@ -65,6 +123,7 @@ class DishController extends AppController {
 
     public function actionUpdate($id) {
 	$model = $this->findModel($id);
+	//debug($model);
 
 	if ($model->load(Yii::$app->request->post()) && $model->save()) {
 	    //debug($_POST);
