@@ -3,6 +3,7 @@
 use yii\helpers\Html;
 use yii\grid\GridView;
 use yii\widgets\ActiveForm;
+use yii\bootstrap\Modal;
 
 
 $this->title = 'Dishes';
@@ -31,10 +32,13 @@ $this->params['breadcrumbs'][] = $this->title;
     ]); ?>
 
      <p>
-        <?= Html::submitButton('Отправить', ['class' => 'submit','id'=>'today']) ?>
+   
 	 <?= Html::a('Восстановить', 'povarreset',['class' => 'profile-link']) ?>
+	 <?php echo Html::submitButton('Отправить', ['class' => 'submit','id'=>'today']) ;?>
     </p>
     
     <?php ActiveForm::end();?>
   
+ 
+    
 </div>

@@ -5,7 +5,7 @@ namespace app\modules\admin\models;
 use Yii;
 
 /**
- * This is the model class for table "employee".
+ * This is the model class for table "users".
  *
  * @property int $id
  * @property string $login
@@ -13,15 +13,16 @@ use Yii;
  * @property string $name
  * @property string $role
  * @property string $history
+ * @property string $auth_key
  */
-class Employee extends \yii\db\ActiveRecord
+class Users extends \yii\db\ActiveRecord
 {
     /**
      * {@inheritdoc}
      */
     public static function tableName()
     {
-        return 'employee';
+        return 'users';
     }
 
     /**
@@ -30,9 +31,9 @@ class Employee extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['login', 'password', 'name', 'role', ], 'required'],
+            [['login', 'password', 'name', 'role', 'history'], 'required'],
             [['login'], 'string', 'max' => 32],
-            [['password', 'name', 'role', 'history'], 'string', 'max' => 256],
+            [['password', 'name', 'role', 'history', 'auth_key'], 'string', 'max' => 256],
         ];
     }
 
@@ -43,11 +44,12 @@ class Employee extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'login' => 'Логин',
-            'password' => 'Пароль',
-            'name' => 'Имя',
+            'login' => 'Login',
+            'password' => 'Password',
+            'name' => 'Name',
             'role' => 'Role',
             'history' => 'History',
+            'auth_key' => 'Auth Key',
         ];
     }
 }
