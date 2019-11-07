@@ -8,7 +8,7 @@ use yii\data\ActiveDataProvider;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
-use app\modules\admin\models\Today;
+use app\modules\admin\models\OrderToday;
 
 /**
  * UsersController implements the CRUD actions for Users model.
@@ -48,7 +48,7 @@ class UsersController extends Controller
      public function actionOrders()
     {
         $dataProvider = new ActiveDataProvider([
-            'query' => Today::find(),
+            'query' => OrderToday::find()->where(['order_date'=>date('Y-m-d')]),
         ]);
 
         return $this->render('today', [

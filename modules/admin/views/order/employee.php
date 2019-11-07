@@ -13,12 +13,12 @@ $this->params['breadcrumbs'][] = $this->title;
     <p>
     <h1>Выбор блюд на сегодня</h1>
 </p>
-    <?php $form = ActiveForm::begin(['action' => 'employeetoday']); ?>
+    <?php $form = ActiveForm::begin(['action' => 'employeesave']); ?>
 <?=
 GridView::widget([
     'dataProvider' => $dataProvider,
     'columns' => [
-	'id',
+	//'id',
 	'name',
 	'price',
 	[
@@ -30,7 +30,7 @@ GridView::widget([
 			])->hint('Введите количество, если хотите заказать');
 	    }
 		],
-	    ['class' => 'yii\grid\CheckboxColumn'],
+	   // ['class' => 'yii\grid\CheckboxColumn'],
 	    ]
 	]);
 	?>
@@ -46,7 +46,7 @@ GridView::widget([
 	
 	
 	
-		//echo  
+		
 	
 	
 </div>

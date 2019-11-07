@@ -346,7 +346,7 @@ output {
 }
 
 summary {
-  display: list-item;
+  display: item-view;
   cursor: pointer;
 }
 
