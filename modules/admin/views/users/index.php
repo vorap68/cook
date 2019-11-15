@@ -3,9 +3,6 @@
 use yii\helpers\Html;
 use yii\grid\GridView;
 
-/* @var $this yii\web\View */
-/* @var $dataProvider yii\data\ActiveDataProvider */
-
 $this->title = 'Users';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
@@ -14,26 +11,32 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a('Create Users', ['create'], ['class' => 'btn btn-success']) ?>
+	<?= Html::a('Create Users', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
-
-    <?= GridView::widget([
-        'dataProvider' => $dataProvider,
-        'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
-
-            'id',
-            'login',
-            'password',
-            'name',
-            'role',
-            //'history',
-            //'auth_key',
-
-            ['class' => 'yii\grid\ActionColumn'],
-        ],
-    ]); ?>
-
+    <?=
+    GridView::widget([
+	'dataProvider' => $dataProvider,
+	'columns' => [
+	    ['class' => 'yii\grid\SerialColumn'],
+	    'login',
+	    'password',
+	    'name',
+	    'role',
+	    ['attribute' => 'history',
+		'format' => 'raw',
+		'value' => function($data) {
+		    return Html::a(
+				    'Посмотреть', [
+				'/admin/order/history', 'id' => $data->id]
+		    );
+		}
+		    ]
+		    ,
+		    ['class' => 'yii\grid\ActionColumn',
+			'template'=>'{update}{delete}'],
+		],
+	    ]);
+	    ?>
 
 </div>

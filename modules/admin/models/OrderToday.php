@@ -43,10 +43,14 @@ class OrderToday extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'login' => 'Login',
-            'name_dish' => 'Name Dish',
-            'price' => 'Price',
-            'order_date' => 'Order Date',
+            'login' => 'Логин',
+            'name_dish' => 'Название блюд ',
+            'price' => 'Общая цена',
+            'order_date' => 'Дата заказа ',
         ];
     }
+    public function getUsers() {
+	return $this->hasOne(Users::className(),['id'=>'users_id']);
+    }
+    
 }

@@ -4,17 +4,7 @@ namespace app\modules\admin\models;
 
 use Yii;
 
-/**
- * This is the model class for table "users".
- *
- * @property int $id
- * @property string $login
- * @property string $password
- * @property string $name
- * @property string $role
- * @property string $history
- * @property string $auth_key
- */
+
 class Users extends \yii\db\ActiveRecord
 {
     /**
@@ -31,7 +21,7 @@ class Users extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['login', 'password', 'name', 'role', 'history'], 'required'],
+            [['login', 'password', 'name',], 'required'],
             [['login'], 'string', 'max' => 32],
             [['password', 'name', 'role', 'history', 'auth_key'], 'string', 'max' => 256],
         ];
@@ -44,12 +34,29 @@ class Users extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'login' => 'Login',
-            'password' => 'Password',
-            'name' => 'Name',
-            'role' => 'Role',
-            'history' => 'History',
+            'login' => 'Логин',
+            'password' => 'Пароль',
+            'name' => 'Имя',
+            'role' => 'Должность',
+            'history' => 'История заказов',
             'auth_key' => 'Auth Key',
         ];
     }
+    
+//    public function setPassword($password)
+//{
+//    $this->password = Yii::$app->security->generatePasswordHash($password);
+//}
+
+public function beforeSave($insert)
+{
+    if(parent::beforeSave($insert)){
+       $this->password=Yii::$app->security->generatePasswordHash($this->password);
+       return true;
+    }else{
+       return false;
+    }
+}
+
+
 }

@@ -55,8 +55,8 @@ AppAsset::register($this);
 			<img src="images/kolpac.jpg" alt="news image" class="img-fluid navimg">
 		</div>
 		<div class="col-8 side_top_right">
-			<h6>Steve Waugh </h6>
-			<p>Photographer</p>
+			<h6>Хорошие обеды </h6>
+			<p></p>
 		</div>
 		</div>
        <header>

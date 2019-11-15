@@ -14,7 +14,7 @@ use Yii;
  */
 class Dish extends \yii\db\ActiveRecord
 {
-    public $foto;
+    public $image;
     /**
      * {@inheritdoc}
      */
@@ -40,7 +40,7 @@ class Dish extends \yii\db\ActiveRecord
         return [
             [['name'], 'safe'],
             [['price'], 'number'],
-            [[ 'foto'], 'file', 'extensions' => 'png, jpg'],
+            [[ 'image'], 'file', 'extensions' => 'png, jpg'],
         ];
     }
 
@@ -52,7 +52,7 @@ class Dish extends \yii\db\ActiveRecord
         return [
             'id' => 'ID',
             'name' => 'название блюда',
-            'foto' => 'фото',
+            'image' => 'фото',
             'price' => 'цена',
 	    'count' => '',
         ];
@@ -60,8 +60,8 @@ class Dish extends \yii\db\ActiveRecord
 
     public function upload(){
         if($this->validate()){
-            $path = 'upload/store/' . $this->foto->baseName . '.' . $this->foto->extension;
-            $this->foto->saveAs($path);
+            $path = 'upload/store/' . $this->image->baseName . '.' . $this->image->extension;
+            $this->image->saveAs($path);
             $this->attachImage($path, true);
 //            @unlink($path);
             return true;

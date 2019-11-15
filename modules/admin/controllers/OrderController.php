@@ -9,6 +9,7 @@ use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use app\modules\admin\models\Dish;
+use yii\web\UploadedFile;
 
 /**
  * OrderController implements the CRUD actions for OrderToday model.
@@ -97,7 +98,8 @@ class OrderController extends Controller
 	$this->layout = 'employeeLayout';
 	//debug($model->login);
 	
-	$medias = new Dish;
+	//$medias = new Dish;
+	$medias = Dish::find();
 	$dataProvider = new ActiveDataProvider([
 	    'query' => Dish::find()->where(['status' => '1']),
 	]);
@@ -110,6 +112,7 @@ class OrderController extends Controller
     public function actionEmployeesave() {
 	$this->layout = 'employeeLayout';
 	$login = Yii::$app->user->identity->login;
+	$id = Yii::$app->user->identity->id;
 	$mass = Yii::$app->request->post();
 	$tdish = $mass['Dish']['count'];
 	$today = new OrderToday;
@@ -121,6 +124,7 @@ class OrderController extends Controller
 		$today->price = $medias['price']*$value + $dish_price;
 		$today->login = $login;
 		$today->order_date = date('Y-m-d');
+		$today->users_id = $id;
 		$dish_today = $today->name_dish;
 		$dish_price = $today->price;
 		//debug(date('d m Y'));
@@ -152,6 +156,19 @@ class OrderController extends Controller
         return $this->render('employeetoday', [
             'dataProvider' => $dataProvider,
         ]);
+    }
+    
+   /* История заказов определенного (id) сотрудника*/
+    public function actionHistory(){
+	$id = Yii::$app->request->get('id');
+	//$history = OrderToday::find()->where(['users_id'=>$id])->all();
+	$dataProvider  = new ActiveDataProvider([
+	     'query'=>OrderToday::find()->where(['users_id'=>$id]),
+	 ]);
+    //debug($history);
+	return $this->render('history',['dataProvider'=>$dataProvider]);
+	
+ 
     }
     
 }

@@ -54,8 +54,8 @@ AppAsset::register($this);
 			<img src="images/kolpac.jpg" alt="news image" class="img-fluid navimg">
 		</div>
 		<div class="col-8 side_top_right">
-			<h6>Steve Waugh </h6>
-			<p>Photographer</p>
+			<h6>Хорошие обеды </h6>
+			<p></p>
 		</div>
 		</div>
        <header>
@@ -66,6 +66,7 @@ AppAsset::register($this);
 						<ul class="menu">
 							<li class="active"><a href="<?= Url::home()?>" class="scroll">Home</a></li>
 							
+							 <li class="mt-sm-3"><a href="<?= Url::to('/admin/dish/povar') ?>" class="scroll">Список блюд на сегодня:<?=date('Y-m-d')?></a></li>
 							 <li class="mt-sm-3"><a href="<?= Url::to('/admin/users/orders') ?>" class="scroll">Список заказов на сегодня:<?=date('Y-m-d')?></a></li>
 				
 							  <li class="mt-sm-3"><a href="<?= \yii\helpers\Url::to(['/site/logout'])?>"><i class="fa fa-user"></i> <?= Yii::$app->user->identity['name']?> (Выход)</a></li>

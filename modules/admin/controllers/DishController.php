@@ -57,8 +57,8 @@ class DishController extends AppController {
 	$model = new Dish();
 	//debug($model);
 	if ($model->load(Yii::$app->request->post()) && $model->save()) {
-	    $model->foto = UploadedFile::getInstance($model, 'foto');
-	    if ($model->foto) {
+	    $model->image = UploadedFile::getInstance($model, 'foto');
+	    if ($model->image) {
 		$model->upload();
 	    }
 	    Yii::$app->session->setFlash('success', "Блюдо {$model->name} обновлено");
@@ -73,8 +73,8 @@ class DishController extends AppController {
 
 	if ($model->load(Yii::$app->request->post()) && $model->save()) {
 	    //debug($_POST);
-	    $model->foto = UploadedFile::getInstance($model, 'foto');
-	    if ($model->foto) {
+	    $model->image = UploadedFile::getInstance($model, 'foto');
+	    if ($model->image) {
 		$model->upload();
 	    }
 	    Yii::$app->session->setFlash('success', "Блюдо {$model->name} обновлено");
